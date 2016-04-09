@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Shakhar Dasgupta<sdasgupt@oswego.edu>
+ * Copyright (C) 2016 Christopher Wells <cwellsny@nycap.rr.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,12 +16,30 @@
  */
 package musebulb;
 
+import musegestures.MuseGestureServer;
+import musegestures.MuseGestures;
+
 /**
+ * Controls the bulb using the Muse Gestures.
  *
- * @author Shakhar Dasgupta<sdasgupt@oswego.edu>
+ * @author Christopher Wells {@literal <cwellsny@nycap.rr.com>}
  */
-public class Main {
-    public static void main(String[] args) {
-        BulbGestureHandler handler = new BulbGestureHandler();
+public class BulbGestureHandler implements MuseGestures {
+
+    private final BulbFrame bulbFrame;
+    private final MuseGestureServer server;
+
+    public BulbGestureHandler() {
+        int port = 5000;
+        this.server = new MuseGestureServer(this, port);
+        this.server.start();
+
+        this.bulbFrame = new BulbFrame();
     }
+
+    @Override
+    public void onBlink() {
+        this.bulbFrame.toggle();
+    }
+
 }
