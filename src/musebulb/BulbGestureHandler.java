@@ -38,7 +38,7 @@ public class BulbGestureHandler implements MuseGestures {
     }
 
     @Override
-    public void onBlink() {
+    public void onJawClench() {
         this.bulbFrame.toggle();
     }
 
